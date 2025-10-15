@@ -1,0 +1,632 @@
+[
+  {
+    "content": "arXiv:2502.02649v2 [cs.AI] 6 Feb 2025 Fully Autonomous AI Agents Should Not be Developed Margaret Mitchell Avijit Ghosh Alexandra Sasha Luccioni Giada Pistilli Hugging Face {meg,avijit,sasha.luccioni,giada}@hf.co Abstract This paper argues that fully autonomous AI agents should not be developed. In support of this position, we build from prior scientiﬁc literature and current product marketing to delineate different AI agent levels and detail the ethical values at play in each, documenting trade-offs in potential beneﬁts and risks. Our analysis reveals that risks to people increase with the autonomy of a system: The more control a user cedes to an AI agent, the more risks to people arise. Particularly concerning are safety risks, which affect human life and impact further values. 1. Introduction The sudden, rapid advancement of Large Language Model (LLM) capabilities–from writing ﬂuent sentences to achieving increasingly high accuracy on benchmark datasets–has led AI developers and businesses alike to look towards what comes next. The tail end of 2024 saw “AI agents”, autonomous goal-directed systems, begin to be marketed and deployed as the next big advancement in AI technology. Many recent AI agents are constructed by integrating LLMs into larger, multi-functional systems, capable of carrying out a variety of tasks",
+    "metadata": {
+      "title": "sample",
+      "page_num": "1",
+      "chunk_id": "1",
+      "source": "tests/data/sample.pdf",
+      "global_id": "0"
+    }
+  },
+  {
+    "content": "Many recent AI agents are constructed by integrating LLMs into larger, multi-functional systems, capable of carrying out a variety of tasks. A foundational premise of this emerging paradigm is that computer programs need not be restricted to functioning as human-controlled tools designed for speciﬁc tasks; rather, systems now have the capacity to autonomously combine and execute multiple tasks without human intervention. This transition marks a fundamental shift towards systems capable of creating contextspeciﬁc plans in non-deterministic environments. Many modern AI agents do not merely perform pre-deﬁned actions, but are designed to analyze novel situations and take previously undeﬁned actions to achieve goals. To better understand the potential beneﬁts and risks in current AI agent development, we review recent AI agent products1 alongside research on AI agents to document different potential beneﬁts and risks aligned to human values. Our analysis reveals that risks to people increase with a sys1Provided in footnotes throughout this work. tem’s level of autonomy: the more control a user cedes, the more risks arise from the system. As others (Chan et al., 2023) have previously noted, there is an urgent need to anticipate and address risks of increasing agency, and we do this via a value-based characterization",
+    "metadata": {
+      "title": "sample",
+      "page_num": "1",
+      "chunk_id": "2",
+      "source": "tests/data/sample.pdf",
+      "global_id": "1"
+    }
+  },
+  {
+    "content": "Particularly concerning are risks related to the value of safety for individuals (Section 5.2.10), which include loss of human life and open the door for privacy risks (Section 5.2.8) and security risks (Section 5.2.11). Compounding the issue is misplaced trust (Section 5.2.13) in unsafe systems, which enables a snowball effect of yet further harms. For example, the safety issue of “hijacking”, wherein an agent is instructed by a malicious third party to exﬁltrate conﬁdential information, can create further harms as that information is used to compromise the user’s public reputation or ﬁnancial stability and to identify additional people as targets of attack (U.S. AI Safety Institute, 2025). Given these risks, we argue that developing fully autonomous AI agents–systems capable of writing and executing their own code beyond predeﬁned constraints–should be avoided. Complete freedom for code creation and execution enables the potential to override human control, realizing some of the worst harms described in Section 5. In contrast, semi-autonomous systems, which retain some level of human control, offer a more favorable risk-beneﬁt proﬁle, depending on the degree of autonomy, the complexity of tasks assigned, and the nature of human involvement. 2. Background 2.1. A Brief History of Artiﬁcial Agents The idea of humans being assisted by artiﬁcial autonomous systems can be found throughout human history. Ancient mythology describes Cadmus (ca",
+    "metadata": {
+      "title": "sample",
+      "page_num": "1",
+      "chunk_id": "3",
+      "source": "tests/data/sample.pdf",
+      "global_id": "2"
+    }
+  },
+  {
+    "content": "Ancient mythology describes Cadmus (ca. 2000 BCE), who sowed dragon teeth that turned into soldiers. Aristotle speculated that automata could replace human slavery: “There is only one condition in which we can imagine managers not needing subordinates, and masters not needing slaves. This condition would be that each instrument could do its own work, at the word of command or by intelligent anticipation” (Aristotle, 1999). An early precursor to artiﬁcial agents was created by Ktesibios of Alexandria (ca. 250 BCE), who 1",
+    "metadata": {
+      "title": "sample",
+      "page_num": "1",
+      "chunk_id": "4",
+      "source": "tests/data/sample.pdf",
+      "global_id": "3"
+    }
+  },
+  {
+    "content": "Fully Autonomous AI Agents Should Not be Developed invented a water clock that used a regulator to maintain a constant ﬂow rate. This demonstrated that it was possible to create a system that could modify its own behavior in response to changes in its environment, previously believed to be limited to living things (Russell & Norvig, 2020). More recently, writing on autonomous systems in the form of robotic automata has highlighted the kinds of risks we discuss here. Famously, Asimov (1942) provided the Three Laws of Robotics (Figure 1): 1. A robot may not injure a human being or, through inaction, allow a human being to come to harm. 2. A robot must obey the orders given it by human beings except where such orders would conﬂict with the First Law. 3. A robot must protect its own existence as long as such protection does not conﬂict with the First or Second Law. Figure 1. Isaac Asimov’s Three Laws of Robotics. The way such concepts concretely translated to computer software remained elusive until the late 1900s, when advances in hardware and computer functionality catalyzed excitement on AI agents as an imminent breakthrough (Sargent, 1992; Guilfoyle & Warner, 1994; Wooldridge & Jennings, 1995; Nwana & Ndumu, 1999)",
+    "metadata": {
+      "title": "sample",
+      "page_num": "2",
+      "chunk_id": "1",
+      "source": "tests/data/sample.pdf",
+      "global_id": "4"
+    }
+  },
+  {
+    "content": "A particular form of AI agent became extensively used in reinforcement learning because it enabled the implementation of separate goals and objective functions for independent actors within the same action space (Tan, 1993; Littman, 1994), which allowed the development of new methods and approaches for exploration and optimization (Busoniu et al., 2008). 2.2. Current Landscape of Agentic Systems In the 2020s, work on AI agents broadened the range of functionality that computer systems could provide while requiring less input from users. Newly available systems can now complete tasks previously requiring human interaction with multiple different people and programs, e.g., organizing meetings2 or creating personalized social media posts.3 In the physical world, autonomous system development has made signiﬁcant advances in multiple domains. Autonomous vehicles represent one of the more visible4 applications, with systems capable of perceiving5 their environment and navigating without human input (Van Brummelen et al., 2018). These range from consumer vehicles with varying levels of autonomy to fully autonomous systems tested in controlled environments (Ballingall et al., 2020). The development of autonomous robots has similarly expanded, from industrial manu2E.g., meeting organization agents: Lindy, Zapier, NinjaTech, Attri 3Example social media creation agent: HubSpot 4Waymo to test in 10 new cities...-The Verge 5Distinct from human perception, e.g., with sensors",
+    "metadata": {
+      "title": "sample",
+      "page_num": "2",
+      "chunk_id": "2",
+      "source": "tests/data/sample.pdf",
+      "global_id": "5"
+    }
+  },
+  {
+    "content": "facturing (M¨uller et al., 2021) to healthcare applications (Haidegger, 2019), with systems capable of increasingly complex physical interactions and decision-making. AI models (such as state-of-the-art LLMs) are now being integrated into robotic systems,6 bringing classic robotics into the fold of the agentic AI landscape. Perhaps most controversially, autonomous weapons systems have emerged as a critical area of development.7 These systems, capable of engaging targets without meaningful human control, raise signiﬁcant ethical questions about accountability, moral responsibility (Chavannes et al., 2020), and safety that extend beyond those of purely digital agents (Bloch et al., 2020). Harms due to misalignment (Kierans et al., 2024) with human goals may be further compounded with full autonomy, where all human control is ceded. 3. Deﬁnitions 3.1. On AI Agents Analyzing potential beneﬁts and risks of AI agents requires understanding what an AI agent is, yet deﬁnitions and descriptions vary greatly. Within AI, the term “agent” is currently used for everything from single-step promptand-response systems8 to multi-step customer support systems.9 To better understand what an AI agent is, we therefore review currently available AI agents and AI agent platforms (examples provided in footnotes throughout this document) as well as historical literature on the promise of AI agents (references throughout), and note the different functionalities described (Table 2)",
+    "metadata": {
+      "title": "sample",
+      "page_num": "2",
+      "chunk_id": "3",
+      "source": "tests/data/sample.pdf",
+      "global_id": "6"
+    }
+  },
+  {
+    "content": "Deﬁnitions across these sources differ in terms of who and what is centered (the person, the computer system, or the workﬂow), the speciﬁcity and clarity of the language used, and the types of systems that the deﬁnition pinpoints (e.g., whether it distinguishes autonomous systems from automatic systems). Towards the goal of harmonizing these different perspectives for this research, we propose the following deﬁnition of “AI agent”: Computer software systems capable of creating contextspeciﬁc plans in non-deterministic environments. Although there is not full consensus on what an “AI agent” is, a commonality across recently introduced AI agents is that they act with some level of autonomy: given a goal, they can decompose it into subtasks and execute each one of them without direct human intervention. For example, an ideal AI agent could respond to a high-level request such 6Open source robotics with reasoning- Tweet; using LLMs to train and control robots–Deepmind Announcement 7AI’s ‘Oppenheimer moment’...–The Guardian 8E.g., New autonomous agents scale your team... - Microsoft 9E.g., as described by Lindly in their AI Customer Support page. 2",
+    "metadata": {
+      "title": "sample",
+      "page_num": "2",
+      "chunk_id": "4",
+      "source": "tests/data/sample.pdf",
+      "global_id": "7"
+    }
+  },
+  {
+    "content": "Fully Autonomous AI Agents Should Not be Developed Agentic Level Description Term Example Code Who’s in Control? ✩✩✩✩ Model has no impact on program ﬂow Simple processor print llm output(llm response) Human ★✩✩✩ Model determines basic program ﬂow Router if llm decision(): path a() else: path b() Human: How functions are done; Æ System: When ★★✩✩ Model determines how functions are executed Tool call run function(llm chosen tool, llm chosen args) Human: What functions are done; Æ System: How ★★★✩ Model controls iteration and program continuation Multi-step agent while should continue(): execute next step() Human: What functions exist; Æ System: Which to do, when, how ★★★★ Model creates & executes new code Fully autonomous agent create code(user request); execute() Æ System Table 1. Levels of AI Agent: Systems using machine-learned models can have different levels of agency. They can also be combined in “multiagent systems,” where one agent workﬂow triggers another, or multiple agents work collectively toward a goal. Levels adapted from (Roucher et al., 2024). as “help me write a great ICML paper about AI agents” by independently breaking this task down into: retrieving highly-cited ICML papers; retrieving information about AI agents from the internet; and creating an outline informed by the content it retrieved.10 Recently introduced AI agents are built on ML models, many speciﬁcally using LLMs to drive their actions, which is a new approach for computer software execution",
+    "metadata": {
+      "title": "sample",
+      "page_num": "3",
+      "chunk_id": "1",
+      "source": "tests/data/sample.pdf",
+      "global_id": "8"
+    }
+  },
+  {
+    "content": "Aside from this difference, today’s AI agents share similarities with those in the past and, in some cases, realize previous ideas of what agents might be like (Wooldridge & Jennings, 1995): acting with autonomy, demonstrating social ability, and appropriately balancing reactive and proactive actions. 3.2. On Agency The concept of “agency” is central to debates about autonomous AI systems, yet its meaning and implications remain philosophically contested. In general terms, an agent is understood as an entity with capacity to act (Anscombe, 1957; Davidson, 1963). Applying this concept to artiﬁcial systems raises questions about the nature of those acts’ intentionality: the philosophical literature commonly understands agency through the lens of intentional action, where actions are explained in terms of the agent’s mental states (e.g., beliefs, desires) and their capacity to act for reasons (Davidson, 1963; Goldman, 1970), but artiﬁcially intelligent agents are not known to have mental states as historically discussed. This suggests that AI agents lack the fundamental characteristics of genuine agency (Frankfurt, 1971; Bratman, 1987; Velleman, 1992). As such, philosophical foundations supporting the development of “agency” in AI agents–and indeed, whether AI agents may be said to have 10No AI agents were used in the creation of this paper. “agency” at all–remain questionable",
+    "metadata": {
+      "title": "sample",
+      "page_num": "3",
+      "chunk_id": "2",
+      "source": "tests/data/sample.pdf",
+      "global_id": "9"
+    }
+  },
+  {
+    "content": "“agency” at all–remain questionable. This has two primary ramiﬁcations for this work: (1) the increased risk we note with increasing agentic levels is not counter-balanced by common philosophical underpinnings that might motivate the beneﬁts of agency; (2) we contextualize AI agents using the concept of “autonomy”, and center the concept of “agent”, rather than agency, in recognizing agentic levels. 4. AI Agent Levels AI agents may be said to be more or less autonomous (or agentic), and the extent to which something is an agent may be understood on a sliding scale. Most writing on AI agents do not make such distinctions, which has contributed to recent confusion in both technical and public discourse about what AI agents are and what they are capable of (Lambert, 2024). Addressing this issue, a proposal of different gradations of “AI agent” has recently been put forward by multiple researchers (e.g., Kapoor et al. (2024); Ng (2024); Greyling (2024); Lambert (2024); Roucher et al. (2024), although there is not yet consensus on the speciﬁcs of each level. Drawing from these ideas and different descriptions of AI agents, we propose a leveled AI agent scale in Table 1. Levels are one way of categorizing; for a classic categorization with consensus, see Russell and Norvig (1995). Our proposed agentic levels correspond to decreasing input from a user and decreasing code written by the agent developers. On the other side of this coin, AI agents can control more of how they operate",
+    "metadata": {
+      "title": "sample",
+      "page_num": "3",
+      "chunk_id": "3",
+      "source": "tests/data/sample.pdf",
+      "global_id": "10"
+    }
+  },
+  {
+    "content": "On the other side of this coin, AI agents can control more of how they operate. This is a critical aspect of the AI agent scale to understand in order to inform how agents might be developed for the better: The more autonomous the system, the more we cede human control. 3",
+    "metadata": {
+      "title": "sample",
+      "page_num": "3",
+      "chunk_id": "4",
+      "source": "tests/data/sample.pdf",
+      "global_id": "11"
+    }
+  },
+  {
+    "content": "Fully Autonomous AI Agents Should Not be Developed Action surface options: The spaces (digital or analog) where an agent can operate. Adaptability: The extent to which a system can update its actions based on new information or changes in context. Number: Single-agent or multi-agent, meeting needs of users by working together, in sequence, or in parallel. Personalization: The extent to which an agent uses a user’s data to provide user-speciﬁc unique content. Personiﬁcation: The extent to which an agent is designed to be like a speciﬁc person or group of people. Proactivity: The amount of goal-directed behavior that a system can take without direct speciﬁcation from a user. Reactivity: Extent to which a system can respond to changes in its environment in a timely fashion. Request format options: The formats an agent uses for input (e.g., code, natural language). Versatility: Diversity of possible agent actions, including: • Domain speciﬁcity: How many domains agent can operate in (e.g., email, calendars, news). • Interoperability: Extent to which agent can exchange information and services with other programs. • Task speciﬁcity: How many types of tasks agent may perform (e.g., scheduling, summarizing). • Modality speciﬁcity: How many modalities agent can operate in (e.g., text, speech, video, images, forms, code). Table 2. Different functionalities offered by AI agents. See Appendix B for further functionality details. 5. Values Embedded in Agentic Systems 5.1",
+    "metadata": {
+      "title": "sample",
+      "page_num": "4",
+      "chunk_id": "1",
+      "source": "tests/data/sample.pdf",
+      "global_id": "12"
+    }
+  },
+  {
+    "content": "Table 2. Different functionalities offered by AI agents. See Appendix B for further functionality details. 5. Values Embedded in Agentic Systems 5.1. Methodology To examine the relationship between AI agent autonomy level and ethical implications, we conducted a systematic analysis of how agents are conceptualized and deployed across different contexts. Our investigation focused on how varying degrees of agent autonomy interact with value propositions in research and commercial implementations. Speciﬁcally, we: 1. Collected and categorized statements about what agents are,11 their capabilities, beneﬁts, and harms. This included industry surveys that captured how professionals across roles envision and use AI agents;12 case studies of deployed autonomous systems;13 and news articles on the rise of AI agents.14 2. Identiﬁed recurring AI agent value propositions. 3. Converged on a value taxonomy that had corresponding beneﬁts, risks, or both in the reviewed literature. 4. Analyzed the role of values with increased autonomy. The different functionalities and values we present are not intended to be exhaustive, but rather to provide a start11Appendix A provides sources with explicit AI agent deﬁnitions. 12e.g., (LangChain, 2024; Deloitte, 2024; Johnson, 2024) 13e.g., (Sierra AI, 2024) 14e.g., (Temkin, 2024; O’Donnell, 2024; Trestman, 2024) ing point for ethical deliberation on the potential beneﬁts and risks of AI agents",
+    "metadata": {
+      "title": "sample",
+      "page_num": "4",
+      "chunk_id": "2",
+      "source": "tests/data/sample.pdf",
+      "global_id": "13"
+    }
+  },
+  {
+    "content": "Ethical considerations surrounding LLM-based AI agents overlap with those of LLMs (see Bender et al. (2021)). Agents additionally navigate ongoing interactions with both users and environments (Kierans et al., 2024), which introduces ethical dimensions such as the delegation of decision-making authority, the role of human oversight, and potential for emergent behaviors (Li et al., 2006a;b). 5.2. Value taxonomy We distinguish three main patterns in how agentic levels impact value preservation: • Inherent risks (d), present at all autonomy levels due to limitations in an AI agent’s base model(s). • Countervailing relationships (Œ): Where increasing autonomy creates both risks and opportunities with respect to an ethical value. • Ampliﬁed risks (Ò): Where increasing autonomy magniﬁes existing vulnerabilities. è Safety & Security \u0019 Safety (Ò): Autonomy increases unpredictable actions µ Security (Ò): Attack surfaces expand with capabilities 8 Truth & Reliability ¥ Accuracy (d Ò): Errors compound with complexity ☼Truthfulness (d Ò): False information propagates ' Consistency (d Ò): Variability increases with autonomy ² User Interaction ´ Privacy (Ò): Data exposure risks increase Æ Humanlikeness (d Œ): Natural interaction vs. manipulation X Task Performance ´ Assistiveness (Œ): Automation beneﬁts vs. control Ç Efﬁciency (Œ): Speed gains vs. error complexity ◎ Relevance (Œ): Personalization vs",
+    "metadata": {
+      "title": "sample",
+      "page_num": "4",
+      "chunk_id": "3",
+      "source": "tests/data/sample.pdf",
+      "global_id": "14"
+    }
+  },
+  {
+    "content": "control Ç Efﬁciency (Œ): Speed gains vs. error complexity ◎ Relevance (Œ): Personalization vs. bias risks  Broader Impacts : Equity (d Ò): Systemic biases compound Ô Flexibility (Ò): Integration risks grow Sustainability (d Œ): Environmental trade-offs Figure 2. Summary of Section 5 beneﬁt-risk analyses as AI agent autonomy levels increase. Ò: increasing risk with autonomy, Œ: countervailing beneﬁt-risk, d: base model propagates inherent risk. See Appendix C for a more detailed summary. 4",
+    "metadata": {
+      "title": "sample",
+      "page_num": "4",
+      "chunk_id": "4",
+      "source": "tests/data/sample.pdf",
+      "global_id": "15"
+    }
+  },
+  {
+    "content": "Fully Autonomous AI Agents Should Not be Developed 5.2.1. VALUE: ACCURACY The accuracy of an AI agent is modulated by the accuracy of the models it’s based on. Accuracy of AI agents inﬂuence values such as reliability, utility, consistency, and safety. Beneﬁt: When a system is accurate in how it responds to user requests and correctly aligns with developer goals, increased autonomy provides increased useful functionality. Risk: The models on which recent AI agents are based can be inaccurate. The commonly used LLMs are known to produce incorrect information that appears correct. Application to agent levels: (d Ò). Inherent risk from AI agent base model(s) is ampliﬁed with increased autonomy. For example: • Simple→Tool Call: Inaccuracy propagated to inappropriate tool selection. • Multi-step: Cascading errors compound risk of inaccurate or irrelevant outcomes. • Fully Autonomous: Unbounded inaccuracies may create outcomes wholly unaligned with human goals. 5.2.2. VALUE: ASSISTIVENESS AI agents are often motivated as assistive for user needs, supplementing a user’s abilities and increasing their efﬁciency in ﬁnishing multiple tasks simultaneously. Beneﬁts: apabilities, such as an AI agent that helps a blind user navigate busy staircases. AI agents that are well-developed to be assistive could offer their users more freedom and opportunity; help to improve their users’ positive impact within their organizations; and help users to increase their public reach",
+    "metadata": {
+      "title": "sample",
+      "page_num": "5",
+      "chunk_id": "1",
+      "source": "tests/data/sample.pdf",
+      "global_id": "16"
+    }
+  },
+  {
+    "content": "Risk: When agents replace people–such as when AI agents are used instead of employees–this creates job loss and economic impacts, driving a further divide between the people creating technology and the people who have provided data for the technology (often without consent). Further, assistiveness that is poorly designed could lead to harms from over-reliance or inappropriate trust (Section 5.2.13). Application to agentic levels: (Œ). By design, assistiveness increases as the AI agent level increases: Each increasing AI agent level provides for more assistive options, as the AI system requires less guidance from the developer or user. 5.2.3. VALUE: CONSISTENCY Some sources motivate AI agents as helping with consistency (e.g., (Salesforce, 2024; Oracle, 2024)). We are not aware of rigorous work on the nature of AI agent consistency, although related work has shown that the LLMs that many AI agents are based on are highly inconsistent (Koga, 2023; Stureborg et al., 2024). Beneﬁt: AI agents are not “affected” in a way that humans are, with inconsistencies caused by mood, hunger, sleep level, or biases in the perception of people (although AI agents perpetuate biases based on the human content they were trained on). As such, they may be designed to provide more consistent treatment in situations where humans may be inappropriately inconsistent, such as in customer support",
+    "metadata": {
+      "title": "sample",
+      "page_num": "5",
+      "chunk_id": "2",
+      "source": "tests/data/sample.pdf",
+      "global_id": "17"
+    }
+  },
+  {
+    "content": "Risk: The generative component of many AI agents introduces inherent variability in outcomes, even across similar situations. This might affect speed and efﬁciency, as people must uncover and address an AI agent’s inappropriate inconsistencies. Inconsistencies that go unnoticed may create safety issues. Consistency may also not always be desirable, as it can come in tension with equity: treating everyone the same way can put people who need more help at a disadvantage. Maintaining consistency across different deployments and chains of actions will likely require an AI agent to record and compare its different interactions– which brings with it risks of surveillance and privacy. Application to agentic levels: (d Ò). A common base model for modern AI agents, LLMs, is known to produce inconsistent outcomes. This risk is further increased as the level is increased due to the non-deterministic nature of AI agents: The more control an AI agent has, the less determinism programmed by or guided by a human applies. As agentic level increases, so too do cascade and compounding effects as multiple sources of inconsistency interact. 5.2.4. VALUE: EFFICIENCY A common selling point of AI agents is that they may help users to get more tasks done more quickly, acting as an additional helping hand. Beneﬁt: Ways systems might help with efﬁciency include organizing a user’s documents so they can focus on spending more time with their family or pursuing work they ﬁnd rewarding",
+    "metadata": {
+      "title": "sample",
+      "page_num": "5",
+      "chunk_id": "3",
+      "source": "tests/data/sample.pdf",
+      "global_id": "18"
+    }
+  },
+  {
+    "content": "A future self-driving AI agent may make routing decisions directly, and could coordinate with other systems for relevant updates, allowing users to reach their destinations more quickly. Risk: Trying to identify and ﬁx errors that agents introduce–which may be a complex cascade of issues due to agents’ ability to take multiple sequential steps–can be time-consuming, difﬁcult, and stressful. Application to agentic levels: (Œ). The relationship between autonomy and efﬁciency is subject to the accuracy of the system and the control provided by the developer and user. When there is room for error, AI agents may create 5",
+    "metadata": {
+      "title": "sample",
+      "page_num": "5",
+      "chunk_id": "4",
+      "source": "tests/data/sample.pdf",
+      "global_id": "19"
+    }
+  },
+  {
+    "content": "Fully Autonomous AI Agents Should Not be Developed more errors, slowing down efﬁciency; this holds whether or not error is provided by a person or by the system. Accurate systems could help people to be more efﬁcient as the agentic level increases and more types of tasks can be completed. 5.2.5. VALUE: EQUITY AI agents may affect how fair and inclusive situations are. Beneﬁt: AI agents can potentially help “level the playing ﬁeld”. For example, a meeting assistant might display how much time each person has had to speak. This could be used to promote more equal participation or highlight imbalances across gender or location.15 Risk: The machine learned models underlying modern AI agents are trained on human data; human data can be inequitable, unfair, and exclusionary. Inequitable outcomes may also emerge due to sample bias in data collection (for example, over-representing some countries) and job loss from agents replacing human workers (see Section 5.2.2). Application to agentic levels: (d Ö). The listed beneﬁts and risks are largely inherent to the base model(s) an AI agent is built on, and so hold regardless of agent level. However, as AI agent autonomy increases, it becomes closer to an artiﬁcial worker compared to a tool, increasing the risk of job loss. On the other hand, AI agents that help to increase equity can help retain employees. 5.2.6",
+    "metadata": {
+      "title": "sample",
+      "page_num": "6",
+      "chunk_id": "1",
+      "source": "tests/data/sample.pdf",
+      "global_id": "20"
+    }
+  },
+  {
+    "content": "On the other hand, AI agents that help to increase equity can help retain employees. 5.2.6. VALUE: FLEXIBILITY This refers to the fundamental motivation within AI agent development of systems that can use diverse tools and engage in input/output relationships with multiple systems. Beneﬁt: Flexibility can help increase a user’s efﬁciency and speed, or provide assistance for multiple different needs. Risk: The more an agent is able to affect and be affected by systems, the greater the risk of malicious code and unintended problematic actions, compromising safety and security. For example, an agent connected to a bank account so that it can easily purchase items on behalf of someone would be in a position to drain the bank account. Because of this concern, tech companies have refrained from releasing AI agents that can make purchases autonomously.16 Application to agentic levels: (Ò). Systems may become more ﬂexible the higher the agentic level: As the ability to create new content increases, so too does the potential for content that connects more closely with different systems. 15Equal Time: The Virtual and Hybrid Meeting Assistant 16E.g., Amazon Dreams of AI Agents...-Wired 5.2.7. VALUE: HUMANLIKENESS Current AI agents are designed to be approachable for people, engaging in human-like dialogue and actions",
+    "metadata": {
+      "title": "sample",
+      "page_num": "6",
+      "chunk_id": "2",
+      "source": "tests/data/sample.pdf",
+      "global_id": "21"
+    }
+  },
+  {
+    "content": "VALUE: HUMANLIKENESS Current AI agents are designed to be approachable for people, engaging in human-like dialogue and actions. Beneﬁt: Systems capable of generating human-like behavior offer the opportunity to run simulations on how different subpopulations might respond to different stimuli (Park et al., 2024b). This can be particularly useful in situations where direct human experimentation might cause harm or fatigue. Synthesizing human behavior could be used to predict dating compatibility, or forecast economic changes and political shifts. Another potential beneﬁt currently undergoing research is companionship (Sidner et al., 2018). Risk: The beneﬁts can be a double-edged sword: Humanlikeness can lead users to anthropomorphise the system, which may have negative psychological effects such as overreliance and addiction,17 inappropriate trust (see 5.2.13)–which can create safety harms and harms of associated values–dependence, and emotional entanglement, leading to anti-social behavior or self-harm.18 The phenomenon of “uncanny valley” adds another layer of complexity–as agents become more humanlike but fall short of perfect human simulation, they can trigger feelings of unease, revulsion, or cognitive dissonance in users. Application to agentic levels: (d Ò). This value is realized from the machine learning models that power the agent, and uncanny humanlikeness is possible at the most basic level of AI agent (simple processors)",
+    "metadata": {
+      "title": "sample",
+      "page_num": "6",
+      "chunk_id": "3",
+      "source": "tests/data/sample.pdf",
+      "global_id": "22"
+    }
+  },
+  {
+    "content": "As such, all levels of AI agent carry this value’s beneﬁts and risks. 5.2.8. VALUE: PRIVACY Beneﬁt: AI agents may offer some privacy in keeping transactions and tasks wholly conﬁdential, aside from what is monitorable by the AI agent provider. Risk: For agents to work according to user expectations, the user may provide personal information such as where they’re going, who they’re meeting with, and what they’re doing. Further, for the agent to be able to act on behalf of the user in a personalized way, it may also have access to applications and information sources that can be used to isolate further privacy information (for example, from contact lists, calendars, etc.). Users can easily give up control of their data for efﬁciency (and are more likely to when trusting the agent); if there is a privacy breach, the interconnectivity of different content brought by the AI agent can make things worse. For example, an AI agent with access to phone conversations and social media could share highly intimate information publicly without consent of those in17E.g., People are falling in love with...AI voices-Vox 18Lawsuit: A chatbot hinted a kid should kill his parents...-NPR 6",
+    "metadata": {
+      "title": "sample",
+      "page_num": "6",
+      "chunk_id": "4",
+      "source": "tests/data/sample.pdf",
+      "global_id": "23"
+    }
+  },
+  {
+    "content": "Fully Autonomous AI Agents Should Not be Developed volved. Application to agentic levels: (Ò). The more people cede their control to a system, the more potential there are for privacy breaches outside of human control. 5.2.9. VALUE: RELEVANCE Beneﬁt: Similar to beneﬁts of assistiveness and ﬂexibility, agent outcomes can be uniquely relevant for each user. Risk: This personalization can amplify existing biases and create new ones: As systems adapt to individual users, they risk reinforcing and deepening existing prejudices, creating conﬁrmation bias through selective information retrieval and establishing echo chambers that reify problematic viewpoints. The very mechanisms that make agents more relevant to users–their ability to learn from and adapt to user preferences–can inadvertently perpetuate and strengthen societal biases, making the challenge of balancing personalization with responsible AI development particularly difﬁcult. Application to agentic levels: (Œ). The more freedom a system has to retrieve and formulate new content, the more potential there is to provide relevant information outside of constraints and resources set by users and developers. 5.2.10. VALUE: SAFETY The ethical value of safety is a primary concern in the development of Artiﬁcial General Intelligence (AGI). Many of the beneﬁts and concerns with respect to safety and AGI are also relevant to AI agents",
+    "metadata": {
+      "title": "sample",
+      "page_num": "7",
+      "chunk_id": "1",
+      "source": "tests/data/sample.pdf",
+      "global_id": "24"
+    }
+  },
+  {
+    "content": "Many of the beneﬁts and concerns with respect to safety and AGI are also relevant to AI agents. Beneﬁt: Robotic AI agents may help save people from bodily harm, such as agents capable of diffusing bombs, removing poisons, or operating in manufacturing or industrial settings that are hazardous environments for humans. Risk: The unpredictable nature of agent actions means that seemingly safe individual operations could combine in harmful ways, creating new risks that are difﬁcult to prevent. (This is similar to Instrumental Convergence and the classic paperclip maximizer problem.19) It can also be unclear whether an AI agent might design a process that overrides a given guardrail, or if the way a guardrail is speciﬁed inadvertently creates further problems. If guardrails mitigate loss of human life, such as with autonomous surgeons or missile system operation, this is a severe risk. Therefore, making agents more capable and efﬁcient through broader system access, more sophisticated action chains, and reduced human oversight conﬂicts with safety considerations",
+    "metadata": {
+      "title": "sample",
+      "page_num": "7",
+      "chunk_id": "2",
+      "source": "tests/data/sample.pdf",
+      "global_id": "25"
+    }
+  },
+  {
+    "content": "Further, access to broad interfaces (for example, GUIs, as 19AI and the paperclip problem - CEPR in “Action Surfaces” in Table 2) and human-like behavior gives agents the ability to perform actions similar to a human user, with their same level of control, without setting off any warning systems–such as manipulating or deleting ﬁles, impersonating users on social media, or using stored credit card information to make purchases. Still further safety risks emerge from AI agents’ ability to interact with multiple systems and the by-design lack of human oversight for each action they may take. Application to agentic levels: (Ò) Safety concerns increase with agent autonomy: As people cede control of system behavior to the system itself, human-mandated guardrails stay within the limited scope set by humans, while the agent can create more and more processes outside of them. 5.2.11. VALUE: SECURITY Beneﬁt: Potential beneﬁts are similar to those for Privacy. Risk: AI agents present serious security challenges due to their handling of often sensitive data (customer or user information) combined with their safety risks, such as ability to interact with multiple systems and the by-design lack of detailed human oversight. This can lead to sharing conﬁdential information even when their goals were set by good faith actors. Malicious actors could hijack or manipulate agents to gain access to connected systems, steal sensitive information, or conduct automated attacks at scale",
+    "metadata": {
+      "title": "sample",
+      "page_num": "7",
+      "chunk_id": "3",
+      "source": "tests/data/sample.pdf",
+      "global_id": "26"
+    }
+  },
+  {
+    "content": "Application to agentic levels: (Ò) Different AI agent levels affect security differently. For the ﬁrst four, developers control the code the agent can access, providing a built-in ability to mitigate security outbreaks, e.g., by blocking communication with third parties. However, when an agent is able to create and execute new code (a fully autonomous agent), it’s capable of creating breaches unforeseen by developers. 5.2.12. VALUE: SUSTAINABILITY Beneﬁt: It is hoped that AI agents may alleviate issues relevant to climate, such as by forecasting wildﬁre growth or ﬂooding. Helping address efﬁciency issues, such as trafﬁc efﬁciency, could decrease carbon emissions. Risk: The models current agents are based on bring negative environmental impacts, such as carbon emissions (Luccioni et al., 2024) and usage of potable water (Hao, 2024). Application to agentic levels: (d Œ). On one hand, the models on which AI agents are based bring with them environmental risks. On the other, the ability of AI agents to harness more information than humans and produce novel solutions outside of those foreseen by humans–an ability increased as autonomy increases–may lead to innovative approaches to addressing environmental issues. 7",
+    "metadata": {
+      "title": "sample",
+      "page_num": "7",
+      "chunk_id": "4",
+      "source": "tests/data/sample.pdf",
+      "global_id": "27"
+    }
+  },
+  {
+    "content": "Fully Autonomous AI Agents Should Not be Developed 5.2.13. VALUE: TRUST Recent AI agent writing does not motivate how agents beneﬁt or harm trust, but rather, that systems should be constructed to be worthy of our trust, shown to be safe (Section 5.2.10), secure (Section 5.2.11) and reliable. Application to agentic levels: (d Ò). As the agentic level increases, human trust can lead to increased risks stemming from increased agent ﬂexibility (Section 5.2.6) and issues in its accuracy (Section 5.2.1), consistency (Section 5.2.3), privacy (Section 5.2.8), safety (Section 5.2.10), security (Section 5.2.11), and truthfulness (Section 5.2.14). 5.2.14. VALUE: TRUTHFULNESS Risk: The deep learning technology modern AI agents are based on is well-known to be a source of false information (e.g., (Garry et al., 2024)), which can take shape in forms such as deepfakes or misinformation. AI agents can be used to further entrench this content, such as by tailoring output to current fears and posting on several platforms. This means that AI agents can be used to provide a false sense of what’s true and what’s false, manipulate people’s beliefs, and widen the impact of non-consensual intimate content. False information propagated by AI agents, personalized for speciﬁc people, can also be used to scam them. Further risks emerge from inconsist truthfulness, leading to inappropriate trust: A system correct the majority of the time is more likely to be inappropriately trusted when wrong",
+    "metadata": {
+      "title": "sample",
+      "page_num": "8",
+      "chunk_id": "1",
+      "source": "tests/data/sample.pdf",
+      "global_id": "28"
+    }
+  },
+  {
+    "content": "Application to agentic levels: (d Ò). The more control an AI agent has over its environment and the resources available to it, the more it is able to deﬁne for itself what is true and false within its environment. Because the environments that AI agents may create for themselves are not identical to environments humans are in, the potential for less truthfulness, as based on human environments, increases. 5.3. Summary Our analyses suggest that there are several forms of increased risk with increased agentic levels: • Risks that result from system inaccuracy (ACCURACY value, Section 5.2.1) and inconsistency (CONSISTENCY value, Section 5.2.3) • Risks of breaches of privacy (Section 5.2.8), safety (Section 5.2.10), and security (Section 5.2.11) • Risks of the wider spread of false information (TRUTHFULNESS value, Section 5.2.14) • Risk of loss of control outside human-set guardrails (FLEXIBILITY value, Section 5.2.6) There is also the potential for increased beneﬁt, particularly with respect to assistance (ASSISTIVENESS value, Section 5.2.2), efﬁciency (Section 5.2.4), equity (Section 5.2.5), relevance of outcomes (RELEVANCE value, Section 5.2.9), and some argue for sustainability (Section 5.2.12)",
+    "metadata": {
+      "title": "sample",
+      "page_num": "8",
+      "chunk_id": "2",
+      "source": "tests/data/sample.pdf",
+      "global_id": "29"
+    }
+  },
+  {
+    "content": "Inherent risks, where the risks from the model on which an AI agent is based can easily propagate to even the highest level of autonomy, applies for accuracy (Section 5.2.1), consistency (Section 5.2.3), equity (Section 5.2.5), humanlikeness (Section 5.2.7), sustainability (Section 5.2.12), trust (Section 5.2.13) and truthfulness (Section 5.2.14). 6. Alternative Viewpoints There are at least two alternative viewpoints to the views discussed in the paper. 1. No gradations of “AI agent”: Scholarship and marketing materials generally do not distinguish between different agentic levels. We believe this has created a common confusion on what is an AI agent and what is not. By distinguishing different levels and identifying the level of full autonomy as a speciﬁc type of AI agent, we hope to clarify misunderstandings and isolate this level of autonomy as particularly problematic in AI agent development. 2. Support for building fully autonomous AI agents. Proponents of this view argue that full autonomy or “complete agents” are useful in order help us better understand human intelligence (Lambrinos & Scheier, 1996; Garland, 2015), and that “strong” AI systems could help to counterbalance human errors and irrationality (Garland, 2015). Others have put forward that Artiﬁcial General Intelligence (AGI) would be fully autonomous if realized (Totschnig, 2020), which would entail that developing AGI–a direct goal of multiple researchers and companies–opposes the position in this paper",
+    "metadata": {
+      "title": "sample",
+      "page_num": "8",
+      "chunk_id": "3",
+      "source": "tests/data/sample.pdf",
+      "global_id": "30"
+    }
+  },
+  {
+    "content": "Proponents of achieving AGI argue it could help us solve global problems, such as climate change and hunger (Lu et al., 2023), and provide signiﬁcant economic gains (OpenAI, 2023). We contend that if AGI is to be developed, it should not be developed with full autonomy–humans should always maintain some level of control–and we hope that the distinctions we provide here across different agentic levels helps to inform future AGI goals. 7. Conclusion: Where do we go from here? The history of nuclear close calls provides a sobering lesson about the risks of ceding human control to autonomous systems.20 For example, in 1980, computer systems falsely indicated over 2,000 Soviet missiles were heading toward North America. The error triggered emergency procedures: bomber crews rushed to their stations and command posts prepared for war. Only human cross-veriﬁcation between different warning systems revealed the false alarm. Similar 20False alarm: 1979 NORAD scare was one of several nuclear close calls - UPI 8",
+    "metadata": {
+      "title": "sample",
+      "page_num": "8",
+      "chunk_id": "4",
+      "source": "tests/data/sample.pdf",
+      "global_id": "31"
+    }
+  },
+  {
+    "content": "Fully Autonomous AI Agents Should Not be Developed incidents can be found throughout history. Such historical precedents are clearly linked to our ﬁndings of foreseeable beneﬁts and risks. We ﬁnd no clear beneﬁt of fully autonomous AI agents, but many foreseeable harms from ceding full human control. Looking forward, this suggests several critical directions: 1. Adoption of agent levels: Widespread adoption of clear distinctions between levels of agent autonomy. This would help developers and users better understand system capabilities and associated risks. 2. Human control mechanisms: Developing robust frameworks, both technical and policy level (Cihon, 2024) that maintain meaningful human oversight while preserving beneﬁcial semi-autonomous functionality. This includes creating reliable override systems and establishing clear boundaries for agent operation. 3. Safety veriﬁcation: Creating new methods to verify that AI agents remain within intended operating parameters and cannot override human-speciﬁed constraints. The development of AI agents is a critical inﬂection point in artiﬁcial intelligence. As history demonstrates, even well-engineered autonomous systems can make catastrophic errors from trivial causes. While increased autonomy can offer genuine beneﬁts in speciﬁc contexts, human judgment and contextual understanding remain essential, particularly for high-stakes decisions",
+    "metadata": {
+      "title": "sample",
+      "page_num": "9",
+      "chunk_id": "1",
+      "source": "tests/data/sample.pdf",
+      "global_id": "32"
+    }
+  },
+  {
+    "content": "The ability to access the environments an AI agent is operating in is essential, providing humans with the ability to say “no” when a system’s autonomy drives it well away from human values and goals. 8. Acknowledgements We thank Bruna Trevelin, Orion Penner, and Aymeric Roucher for signiﬁcant contributions to this piece. References Anscombe, G. E. M. Intention. Basil Blackwell, Oxford, 1957. Aristotle. Politics, volume 1. Batoche Books, Kitchener, 1999. Book 1, Part 4. Asimov, I. Runaround. Astounding Science Fiction, 1942. Bai, H., Zhou, Y., Cemri, M., Pan, J., Suhr, A., Levine, S., and Kumar, A. Digirl: Training in-the-wild devicecontrol agents with autonomous reinforcement learning. arXiv preprint arXiv:2406.11896, 2024. Ballingall, S., Sarvi, M., and Sweatman, P. Safety assurance concepts for automated driving systems. SAE International Journal of Advances and Current Practices in Mobility, 2(2020-01-0727):1528–1537, 2020. Bender, E. M., Gebru, T., McMillan-Major, A., and Shmitchell, S. On the dangers of stochastic parrots: Can language models be too big? In Proceedings of the 2021 ACM conference on fairness, accountability, and transparency, pp. 610–623, 2021. Bloch, E., Conn, A., Garcia, D., Gill, A., Llorens, A., Noorma, M., and Roff, H. Ethical and technical challenges in the development, use, and governance of autonomous weapons systems. Technical report, IEEE Standards Association, 2020",
+    "metadata": {
+      "title": "sample",
+      "page_num": "9",
+      "chunk_id": "2",
+      "source": "tests/data/sample.pdf",
+      "global_id": "33"
+    }
+  },
+  {
+    "content": "Technical report, IEEE Standards Association, 2020. URL https://standards.ieee.org/wpcontent/uploads/import/documents/ other/ethical-technical-challengesautonomous-weapons-systems.pdf. Bratman, M. E. Intention, Plans, and Practical Reason. Harvard University Press, Cambridge, MA, 1987. Busoniu, L., Babuska, R., and De Schutter, B. A comprehensive survey of multiagent reinforcement learning. IEEE Transactions on Systems, Man, and Cybernetics, Part C (Applications and Reviews), 38(2):156–172, 2008. Castelfranchi, C. Guarantees for autonomy in cognitive agent architecture. In Wooldridge, M. J. and Jennings, N. R. (eds.), Intelligent Agents, pp. 56–70, Berlin, Heidelberg, 1995. Springer Berlin Heidelberg. ISBN 978-3540-49129-3. Chan, A., Salganik, R., Markelius, A., Pang, C., Rajkumar, N., Krasheninnikov, D., Langosco, L., He, Z., Duan, Y., Carroll, M., et al. Harms from increasingly agentic algorithmic systems. In Proceedings of the 2023 ACM Conference on Fairness, Accountability, and Transparency, pp. 651–666, 2023. Chavannes, E., Klonowska, K., and Sweijs, T. Governing autonomous weapon systems. The Hague: The Hague Centre For Strategic Studies, 2020. Cihon, P. Chilling autonomy: Policy enforcement for human oversight of ai agents. In 41st International Conference on Machine Learning, Workshop on Generative AI and Law, 2024. Damsa, A. Ai with personality — prompting chatgpt using big ﬁve values. Medium, 2023. Accessed: January 30, 2025. Davidson, D",
+    "metadata": {
+      "title": "sample",
+      "page_num": "9",
+      "chunk_id": "3",
+      "source": "tests/data/sample.pdf",
+      "global_id": "34"
+    }
+  },
+  {
+    "content": "Damsa, A. Ai with personality — prompting chatgpt using big ﬁve values. Medium, 2023. Accessed: January 30, 2025. Davidson, D. Actions, reasons, and causes. 1963. Deloitte. Autonomous generative ai agents: Under development. Deloitte, 2024. URL https://www2. 9",
+    "metadata": {
+      "title": "sample",
+      "page_num": "9",
+      "chunk_id": "4",
+      "source": "tests/data/sample.pdf",
+      "global_id": "35"
+    }
+  },
+  {
+    "content": "Fully Autonomous AI Agents Should Not be Developed deloitte.com/us/en/insights/industry/ technology/technology-media-andtelecom-predictions/2025/autonomousgenerative-ai-agents-still-underdevelopment.html. Frankfurt, H. Freedom of the will and the concept of a person. Journal of Philosophy, 68(1):5–20, 1971. Gabriel, I., Manzini, A., Keeling, G., Hendricks, L. A., Rieser, V., Iqbal, H., Tomaˇsev, N., Ktena, I., Kenton, Z., Rodriguez, M., et al. The ethics of advanced ai assistants. arXiv preprint arXiv:2404.16244, 2024. Garland, A. Alex gardland of ex machina talks about artiﬁcial intelligence. New York Times, 2015. URL https://www.nytimes.com/2015/04/26/ movies/alex-garland-of-ex-machinatalks-about-artificial-intelligence. html. Garry, M., Chan, W. M., Foster, J., and Henkel, L. A. Large language models (llms) and the institutionalization of misinformation. Trends in Cognitive Sciences, 28(12):1078–1088, 2024. ISSN 1364-6613. doi: https://doi.org/10.1016/j.tics.2024.08. 007. URL https://www.sciencedirect.com/ science/article/pii/S1364661324002213. Genesereth, M. R. and Ketchpel, S. P. Software agents. Commun. ACM, 37(7):48–ff., July 1994. ISSN 00010782. doi: 10.1145/176789.176794. URL https:// doi.org/10.1145/176789.176794. Goldman, A. A Theory of Human Action. Prentice-Hall, Englewood Cliffs, NJ, 1970. Greyling, C., 2024. URL https://cobusgreyling. medium.com/5-levels-of-ai-agentsupdated-0ddf8931a1c6. Guilfoyle, C. and Warner, E",
+    "metadata": {
+      "title": "sample",
+      "page_num": "10",
+      "chunk_id": "1",
+      "source": "tests/data/sample.pdf",
+      "global_id": "36"
+    }
+  },
+  {
+    "content": "Greyling, C., 2024. URL https://cobusgreyling. medium.com/5-levels-of-ai-agentsupdated-0ddf8931a1c6. Guilfoyle, C. and Warner, E. Intelligent agents: The new revolution in software (ovum report), 1994. Haidegger, T. Autonomy for surgical robots: Concepts and paradigms. IEEE Transactions on Medical Robotics and Bionics, 1(2):65–76, 2019. Hao, K. Ai is taking water from the desert. The Atlantic, 2024. URL https://www.theatlantic.com/ technology/archive/2024/03/ai-waterclimate-microsoft/677602/. He, H., Yao, W., Ma, K., Yu, W., Dai, Y., Zhang, H., Lan, Z., and Yu, D. Webvoyager: Building an end-to-end web agent with large multimodal models. arXiv preprint arXiv:2401.13919, 2024. Huyen, C. Agents, January 2025. URL https:// huyenchip.com/2025/01/07/agents.html. Accessed on January 30, 2025. Johnson, A. The rise of enterprise ai agents: Insights from 1,000+ leaders. tray.ai, 2024. URL https://tray. ai/blog/top-five-must-haves-in-an-aiagent-platform. Kapoor, S., Stroebl, B., Siegel, Z. S., Nadgir, N., and Narayanan, A. Ai agents that matter. arXiv preprint arXiv:2407.01502, 2024. Kierans, A., Ghosh, A., Hazan, H., and Dori-Hacohen, S. Quantifying misalignment between agents. arXiv preprint arXiv:2406.04231, 2024. Koga, S. Exploring the pitfalls of large language models: Inconsistency and inaccuracy in answering pathology board examination-style questions. medRxiv, 2023. doi: 10.1101/2023.08.03.23293401. URL https://www. medrxiv.org/content/early/2023/08/28/ 2023.08.03.23293401",
+    "metadata": {
+      "title": "sample",
+      "page_num": "10",
+      "chunk_id": "2",
+      "source": "tests/data/sample.pdf",
+      "global_id": "37"
+    }
+  },
+  {
+    "content": "medRxiv, 2023. doi: 10.1101/2023.08.03.23293401. URL https://www. medrxiv.org/content/early/2023/08/28/ 2023.08.03.23293401. Lambert, N., 2024. URL https://www. interconnects.ai/p/the-ai-agentspectrum. Lambrinos, D. and Scheier, C. Building complete autonomous agents: A case study on categorization. In Proceedings of IEEE/RSJ International Conference on Intelligent Robots and Systems. IROS’96, volume 1, pp. 170–177. IEEE, 1996. LangChain. The state of ai agents, 2024. URL https:// www.langchain.com/stateofaiagents. Li, Z., Sim, C. H., and Hean Low, M. Y. A survey of emergent behavior and its impacts in agent-based systems. In 2006 4th IEEE International Conference on Industrial Informatics, pp. 1295–1300, 2006a. doi: 10.1109/INDIN.2006.275846. Li, Z., Sim, C. H., and Hean Low, M. Y. A survey of emergent behavior and its impacts in agent-based systems. In 2006 4th IEEE International Conference on Industrial Informatics, pp. 1295–1300, 2006b. doi: 10.1109/INDIN.2006.275846. Liapis, G. and Vlahavas, I. Multi-agent system for emulating personality traits using deep reinforcement learning†. Applied Sciences (2076-3417), 14(24), 2024. Littman, M. L. Markov games as a framework for multiagent reinforcement learning. In Machine learning proceedings 1994, pp. 157–163. Elsevier, 1994. 10",
+    "metadata": {
+      "title": "sample",
+      "page_num": "10",
+      "chunk_id": "3",
+      "source": "tests/data/sample.pdf",
+      "global_id": "38"
+    }
+  },
+  {
+    "content": "Fully Autonomous AI Agents Should Not be Developed Lu, G., Li, S., Mai, G., Sun, J., Zhu, D., Chai, L., Sun, H., Wang, X., Dai, H., Liu, N., Xu, R., Petti, D., Li, C., Liu, T., and Li, C. Agi for agriculture, 2023. URL https://arxiv.org/abs/2304.06136. Lu, Y., Yang, S., Qian, C., Chen, G., Luo, Q., Wu, Y., Wang, H., Cong, X., Zhang, Z., Lin, Y., et al. Proactive agent: Shifting llm agents from reactive responses to active assistance. arXiv preprint arXiv:2410.12361, 2024. Luccioni, S., Jernite, Y., and Strubell, E. Power hungry processing: Watts driving the cost of ai deployment? In The 2024 ACM Conference on Fairness, Accountability, and Transparency, pp. 85–99, 2024. M¨uller, M., M¨uller, T., Ashtari Talkhestani, B., Marks, P., Jazdi, N., and Weyrich, M. Industrial autonomous systems: a survey on deﬁnitions, characteristics and abilities. at-Automatisierungstechnik, 69(1):3–13, 2021. Ng, A., 2024. URL https://x.com/AndrewYNg/ status/1801295202788983136. Nwana, H. S. and Ndumu, D. T. A perspective on software agents research. The Knowledge Engineering Review, 14 (2):125–142, 1999. O’Donnell, J. We need to start wrestling with the ethics of ai agents. MIT Tech Review, 2024. URL https:// www.technologyreview.com/2024/11/26/ 1107309/we-need-to-start-wrestlingwith-the-ethics-of-ai-agents/amp/. OpenAI. Planning for agi and beyond, 2023. URL https://openai.com/index/planningfor-agi-and-beyond/. Oracle. What are ai agents? 2024. URL https://www",
+    "metadata": {
+      "title": "sample",
+      "page_num": "11",
+      "chunk_id": "1",
+      "source": "tests/data/sample.pdf",
+      "global_id": "39"
+    }
+  },
+  {
+    "content": "OpenAI. Planning for agi and beyond, 2023. URL https://openai.com/index/planningfor-agi-and-beyond/. Oracle. What are ai agents? 2024. URL https://www. oracle.com/artificial-intelligence/ ai-agents/. Park, J. S., Zou, C. Q., Shaw, A., Hill, B. M., Cai, C., Morris, M. R., Willer, R., Liang, P., and Bernstein, M. S. Generative agent simulations of 1,000 people. arXiv preprint arXiv:2411.10109, 2024a. Park, J. S., Zou, C. Q., Shaw, A., Hill, B. M., Cai, C., Morris, M. R., Willer, R., Liang, P., and Bernstein, M. S. Generative agent simulations of 1,000 people, 2024b. URL https://arxiv.org/abs/2411.10109. Roucher, A., Noyan, M., and Wolf, T. ”introducing smolagents, a simple library to build agents”. Hugging Face Blog, December 2024. URL https:// huggingface.co/blog/smolagents. Russell, S. and Norvig, P. Artiﬁcial Intelligence: A Modern Approach. Series in Artiﬁcial Intelligence. Prentice-Hall, Englewood Cliffs, NJ, 1995. Russell, S. and Norvig, P. Artiﬁcial Intelligence: A Modern Approach (4th Edition). Pearson, 2020. ISBN 9780134610993. URL http://aima.cs. berkeley.edu/. Salesforce. What are ai agents? beneﬁts, examples, types. 2024. URL https://www.salesforce. com/agentforce/what-are-ai-agents. Sargent, P. Back to school for a brand new abc. The Guardian, pp. 28, 03 1992. Sidner, C. L., Bickmore, T., Nooraie, B., Rich, C., Ring, L., Shayganfar, M., and Vardoulakis, L. Creating new technologies for companionable agents to support isolated older adults",
+    "metadata": {
+      "title": "sample",
+      "page_num": "11",
+      "chunk_id": "2",
+      "source": "tests/data/sample.pdf",
+      "global_id": "40"
+    }
+  },
+  {
+    "content": "Creating new technologies for companionable agents to support isolated older adults. ACM Transactions on Interactive Intelligent Systems (TiiS), 8(3):1–27, 2018. Sierra AI. Shipping and scaling ai agents, 2024. URL https://sierra.ai/blog/shipping-andscaling-ai-agents. Stureborg, R., Alikaniotis, D., and Suhara, Y. Large language models are inconsistent and biased evaluators, 2024. URL https://arxiv.org/abs/2405. 01724. Tan, M. Multi-agent reinforcement learning: Independent vs. cooperative agents. In Proceedings of the tenth international conference on machine learning, pp. 330–337, 1993. Temkin, M. Why ai agent startup /dev/agents commanded a massive 56mseedroundata500m valuation. TechCrunch, 2024. URL https://techcrunch. com/2024/11/28/ai-agent-startup-devagents-has-raised-a-massive-56m-seedround-at-a-500m-valuation/. Totschnig, W. Fully autonomous ai. Sci Eng Ethics, 26: 2473–2485, 2020. URL https://link.springer. com/article/10.1007/s11948-020-00243z. Trestman, M. Agentic ai: A deep dive into the future of automation. Venturebeat, 2024. URL https:// venturebeat.com/ai/agentic-ai-a-deepdive-into-the-future-of-automation/. U.S. AI Safety Institute. Technical blog: Strengthening ai agent hijacking evaluations, January 2025. URL https://www.nist.gov/newsevents/news/2025/01/technical-blogstrengthening-ai-agent-hijackingevaluations. Accessed on January 29, 2025. Van Brummelen, J., O’brien, M., Gruyer, D., and Najjaran, H. Autonomous vehicle perception: The technology of 11",
+    "metadata": {
+      "title": "sample",
+      "page_num": "11",
+      "chunk_id": "3",
+      "source": "tests/data/sample.pdf",
+      "global_id": "41"
+    }
+  },
+  {
+    "content": "Fully Autonomous AI Agents Should Not be Developed today and tomorrow. Transportation research part C: emerging technologies, 89:384–406, 2018. Velleman, J. D. What happens when someone acts? Mind, 101(403):461–481, 1992. Wooldridge, M. and Jennings, N. Intelligent agents: Theory and practice. Knowledge Engineering Review, 10(2):115–152, 1995. URL http://www.dsl. uow.edu.au/˜aditya/csci370/readings/ Wooldridge.Jennings.95.pdf. 12",
+    "metadata": {
+      "title": "sample",
+      "page_num": "12",
+      "chunk_id": "1",
+      "source": "tests/data/sample.pdf",
+      "global_id": "42"
+    }
+  },
+  {
+    "content": "Fully Autonomous AI Agents Should Not be Developed A. Agent deﬁnitions The term “agent” has been used in many engineering contexts, including in references to software agent, intelligent agent, user agent, conversational agent, and reinforcement learning agent (Huyen, 2025). Below, we provide a selection of AI Agent deﬁnitions that have informed this piece. Neither the list we provide here, nor the snippets of text quoted, should be taken as complete. Rather, they serve to illustrate the diversity and richness of AI agent deﬁnitions over the years. As humorously noted in Wooldridge & Jennings (1995): “the question what is an agent? is embarrassing for the agent- based computing community in just the same way that the question what is intelligence? is embarrassing for the mainstream AI community. The problem is that although the term is widely used, by many people working in closely related areas, it deﬁes attempts to produce a single universally accepted deﬁnition.” We ﬁnd stark differences in how AI agents are described, with ambiguous language a common practice in descriptions of products. For example, when materials describe agents as something that uses artiﬁcial intelligence” (), they leave ambiguous what “artiﬁcial intelligence” refers to and the scope of technology included and excluded in the deﬁnition, such as whether simple prompt-response systems qualify as an agent",
+    "metadata": {
+      "title": "sample",
+      "page_num": "13",
+      "chunk_id": "1",
+      "source": "tests/data/sample.pdf",
+      "global_id": "43"
+    }
+  },
+  {
+    "content": "However, most descriptions of “agents” we reviewed entail that the system can take at least one step in program execution without user input. Source & Deﬁnition Russell & Norvig (1995): “An agent is anything that can be viewed as perceiving its environment through sensors and acting upon that environment through effectors.” 2020 edition: “An agent is anything that can be viewed as perceiving its environment and acting upon that environment through actuators.” Castelfranchi (1995): “Agent” is a system whose behaviour is neither casual nor strictly causal, but teleonomic, ”goaloriented” toward a certain state of the world",
+    "metadata": {
+      "title": "sample",
+      "page_num": "13",
+      "chunk_id": "2",
+      "source": "tests/data/sample.pdf",
+      "global_id": "44"
+    }
+  },
+  {
+    "content": "Wooldridge & Jennings (1995): “Perhaps the most general way in which the term agent is used is to denote a hardware or (more usually) software-based computer system that enjoys the following properties: • autonomy: agents operate without the direct intervention of humans or others, and have some kind of control over their actions and internal state (Castelfranchi, 1995); • social ability: agents interact with other agents (and possibly humans) via some kind of agentcommunication language (Genesereth & Ketchpel, 1994); • reactivity: agents perceive their environment (which may be the physical world, a user via a graphical user interface, a collection of other agents, the Internet, or perhaps al of these combined), and respond in a timely fashion to changes that occur in it; • pro-activeness: agents do not simply act in response ot their environment, they are able ot exhibit goal-directed behaviour by taking the initiative.” Genesereth & Ketchpel (1994): “Software agents [are] software components that communicate with their peers by exchanging messages in an expressive agent communication language",
+    "metadata": {
+      "title": "sample",
+      "page_num": "13",
+      "chunk_id": "3",
+      "source": "tests/data/sample.pdf",
+      "global_id": "45"
+    }
+  },
+  {
+    "content": "While agents can be as simple as subroutines, typically they are larger entities with some sort of persistent control (e.g., distinct control threads within a single address space, distinct processes on a single machine, or separate processes on different machines).” Tavus: What is an AI Agent API? (2024): ”[systems] equipped to act autonomously in their environment” Salesforce: What Are AI Agents? Beneﬁts, Examples, Types: ”a type of artiﬁcial intelligence (AI) system that can understand and respond to customer inquiries without human intervention. ” Gabriel et al. (2024): ”[systems] with natural language interfaces, whose function is to plan and execute sequences of actions on behalf of a user–across one or more domains–in line with the user’s expectations.” Park et al. (2024a): can accurately simulate behavior across many contexts Sierra AI (2024) : The magic of AI agents—from both the technological and business perspectives—comes through when they demonstrate deeper integrations and ”agentic” reasoning, allowing them to fully resolve complex customer issues. Felicis: The agentic web (2024): ”How are agents different from traditional automation?” ... agents handle edge cases well, iteratively converse with users to achieve desired results, and adapt to evolving interfaces. Lu et al. (2024): LLM-based agents can understand human instructions, make plans, explore environments, and utilize tools to solve complex tasks 13",
+    "metadata": {
+      "title": "sample",
+      "page_num": "13",
+      "chunk_id": "4",
+      "source": "tests/data/sample.pdf",
+      "global_id": "46"
+    }
+  },
+  {
+    "content": "Fully Autonomous AI Agents Should Not be Developed Source & Deﬁnition Restack: Proactive Agents In Real-World Applications (2025): Proactive AI agents are designed to anticipate user needs and take action before issues arise, contrasting sharply with reactive AI agents that respond only after an event has occurred. GitHub: What are AI agents?: AI agents are autonomous software tools that perform tasks, make decisions, and interact with their environment intelligently and rationally. They use artiﬁcial intelligence to learn, adapt, and take action based on real-time feedback and changing conditions. AI agents can work on their own or as part of a bigger system, learning and changing based on the data they process....AI agents differ from other AI technologies in their ability to act autonomously. Unlike other AI models that require constant human input, intelligent agents can initiate actions, make decisions based on predeﬁned goals, and adapt to new information in real time. This ability to operate independently makes intelligent agents highly valuable in complex, dynamic environments such as software development. SymphonyAI: The complete guide to AI agents for business (2024): An AI agent is an AI software program that performs tasks independently, makes decisions, and solves problems to achieve speciﬁc goals",
+    "metadata": {
+      "title": "sample",
+      "page_num": "14",
+      "chunk_id": "1",
+      "source": "tests/data/sample.pdf",
+      "global_id": "47"
+    }
+  },
+  {
+    "content": "Don’t Sleep on Single-agent Systems - All Hands, Graham Neubig (2024): Recently most practical agents are based on LLMs like Claude by Anthropic or the OpenAI language models. But a language model is not enough to build an agent, you need at least three components: (1) The Underlying LLM; (2) The Prompt: This can be the system prompt that is used to specify the model’s general behavior, or the type of information that you pull in from the agent’s surrounding environment; (3) The Action Space: These are the tools that we provide to the agent to allow it to act in the world. https://www.google.com/search?q=\"what+is+an+ai+agent\"Ñ Gemini summary: a software program that uses artiﬁcial intelligence (AI) to interact with its environment, collect data, and perform tasks. AI agents in Azure Cosmos DB - Microsoft (2024): “Unlike standalone large language models (LLMs) or rule-based software/hardware systems, AI agents have these common features: • Planning: AI agents can plan and sequence actions to achieve speciﬁc goals. The integration of LLMs has revolutionized their planning capabilities. • Tool usage: Advanced AI agents can use various tools, such as code execution, search, and computation capabilities, to perform tasks effectively. AI agents often use tools through function calling. • Perception: AI agents can perceive and process information from their environment, to make them more interactive and context aware",
+    "metadata": {
+      "title": "sample",
+      "page_num": "14",
+      "chunk_id": "2",
+      "source": "tests/data/sample.pdf",
+      "global_id": "48"
+    }
+  },
+  {
+    "content": "• Perception: AI agents can perceive and process information from their environment, to make them more interactive and context aware. This information includes visual, auditory, and other sensory data. • Memory: AI agents have the ability to remember past interactions (tool usage and perception) and behaviors (tool usage and planning). They store these experiences and even perform self-reﬂection to inform future actions. This memory component allows for continuity and improvement in agent performance over time. Kapoor et al. (2024): “Agents are deﬁned as entities that perceive and act upon their environment” What is an AI agent? - LangChain (2024): “An AI agent is a system that uses an LLM to decide the control ﬂow of an application.” Building effective agents - Anthropic (2024): “Agents...are systems where LLMs dynamically direct their own processes and tool usage, maintaining control over how they accomplish tasks.” Roucher et al. (2024): “AI Agents are programs where LLM outputs control the workﬂow.” The AI agent spectrum - Nathan Lambert (2024): “In the current zeitgeist, an ”AI agent” is anything that interacts with the digital or physical world during its output token stream.” B",
+    "metadata": {
+      "title": "sample",
+      "page_num": "14",
+      "chunk_id": "3",
+      "source": "tests/data/sample.pdf",
+      "global_id": "49"
+    }
+  },
+  {
+    "content": "Agent functionalities This section provides a more detailed breakdown of different agent functionalities than in Table 2: • Proactivity: Related to autonomy is proactivity, which refers to the amount of goal-directed behavior that a system can take without a user directly specifying the goal (Wooldridge & Jennings, 1995). An example of a particularly “proactive” AI agent is a system that monitors your refrigerator to determine what food you are running out of, and then purchases what you need for you, without your knowledge. Smart thermostats are proactive AI agents that are being increasingly adopted in peoples’ homes, automatically adjusting temperature based on changes in the 14",
+    "metadata": {
+      "title": "sample",
+      "page_num": "14",
+      "chunk_id": "4",
+      "source": "tests/data/sample.pdf",
+      "global_id": "50"
+    }
+  },
+  {
+    "content": "Fully Autonomous AI Agents Should Not be Developed environment and patterns that they learn about their users’ behavior.21 • Personiﬁcation: An AI agent may be designed to be more or less like a speciﬁc person or group of people. Recent work in this area 22 has focused on designing systems after the Big Five personality traits–Openness, Conscientiousness, Extraversion, Agreeableness, and Neuroticism as a “psychological framework” 23 for AI. At the end of this spectrum would be “digital twins” 24. There are currently not agentic digital twins that we are aware of. Why creating agentic digital twins is particularly problematic has recently been discussed by the ethics group at Salesforce25, among others26. • Personalization: AI agents may use language or perform actions that are aligned to a user’s individual needs, for example, to make investment recommendations 27 based on current market patterns and a user’s past investments. • Tooling: AI agents also have varying amounts of additional resources and tools they have access to. For example, the initial wave of AI agents accessed search engines to answer queries, and further tooling has since been added to allow them to manipulate other tech products, like documents and spreadsheets 28. • Versatility: Related to above is how diverse the actions that an agent can take are. This is a function of: – Domain speciﬁcity: How many different domains an agent can operate in",
+    "metadata": {
+      "title": "sample",
+      "page_num": "15",
+      "chunk_id": "1",
+      "source": "tests/data/sample.pdf",
+      "global_id": "51"
+    }
+  },
+  {
+    "content": "This is a function of: – Domain speciﬁcity: How many different domains an agent can operate in. For example, just email, versus email alongside online calendars and documents. – Task speciﬁcity: How many different types of tasks the agent may perform. For example, scheduling a meeting by creating a calendar invite in participants’ calendars 29, versus additionally sending reminder emails about the meeting and providing a summary of what was said to all participants when it’s over 30. – Modality speciﬁcity: How many different modalities that an agent can operate in–text, speech, video, images, forms, code. Some of the most recent AI agents are created to be highly multimodal 31, and we predict that AI agent development will continue to increase multimodal functionality. – Software speciﬁcity: How many different types of software the agent can interact with, and at what level of depth. • Adaptibility: Similar to versatility is the extent to which a system can update its action sequences based on new information or changes in context. This is also described as being “dynamic” and “context-aware”. • Action surfaces: The places where an agent can do things. Traditional chatbots are limited to a chat interface; chatbased agents may additionally be able to surf the web and access spreadsheets and documents 32, and may even be able to do such tasks via controlling items on your computer’s graphical interface, such as by moving around the mouse 33",
+    "metadata": {
+      "title": "sample",
+      "page_num": "15",
+      "chunk_id": "2",
+      "source": "tests/data/sample.pdf",
+      "global_id": "52"
+    }
+  },
+  {
+    "content": "There have also been physical applications, such as using a model to power robots 34. • Request formats: A common theme across AI agents is that a user should be able to input a request for a task to be completed, without specifying ﬁne-grained details on how to achieve it. This can be realized with low-code solutions 35 with human language in text, or with voiced human language 36. AI agents whose requests can be provided in human language are a natural progression from recent successes with LLM-based chatbots: A chat-based “AI agent” goes further than a chatbot because it can operate outside of the chat application. • Reactivity: This characteristic refers to how long it takes an AI agent to complete its action sequence: Mere moments, or a much longer span of time. A forerunner to this effect can be seen with modern chatbots. For example, ChatGPT responds in mere milliseconds, while Qwen QwQ takes several minutes, iterating through different steps labelled as “Reasoning”. 21Smart Thermostats - Ecobee 22Example 1: Park et al",
+    "metadata": {
+      "title": "sample",
+      "page_num": "15",
+      "chunk_id": "3",
+      "source": "tests/data/sample.pdf",
+      "global_id": "53"
+    }
+  },
+  {
+    "content": "21Smart Thermostats - Ecobee 22Example 1: Park et al. (2024b); Example2: Liapis & Vlahavas (2024); Example 3: Damsa (2023) 23Your next AI agent is minutes away - SmythOS 24Tavus Digital Twin 25How ‘Human’ Should Your AI Agent Be? In Short, Not Very - Salesforce 26O’Donnell (2024) 27AI agents: A guide to the future of intelligent support - Zendesk 28For e.g., Google Gemini 29Elevate Time Management with AI-Powered Scheduling - Attri.ai 30The best AI Notetaker to align sales, support, and project teams - Nyota AI 31Project Mariner - Google 32Microsoft Copilot 33Example 1: DigiRL: Bai et al. (2024); Example 2: WebVoyager: He et al. (2024); Example 3: Computer Use - Anthropic 34Shaping the future of advanced robotics - Deepmind 35SmolAgents - Hugging Face 36Voice intelligence that gets the job done. - Play.ai 15",
+    "metadata": {
+      "title": "sample",
+      "page_num": "15",
+      "chunk_id": "4",
+      "source": "tests/data/sample.pdf",
+      "global_id": "54"
+    }
+  },
+  {
+    "content": "Fully Autonomous AI Agents Should Not be Developed • Number: Systems can be single-agent or multi-agent, meeting needs of users by working together, in sequence, or in parallel. C. Detailed Value-Risk Analysis This appendix provides a more comprehensive analysis than that in Figure 2 of how each value is affected across different autonomy levels, from simple processors to fully autonomous systems. 16",
+    "metadata": {
+      "title": "sample",
+      "page_num": "16",
+      "chunk_id": "1",
+      "source": "tests/data/sample.pdf",
+      "global_id": "55"
+    }
+  },
+  {
+    "content": "Fully Autonomous AI Agents Should Not be Developed Value Simple Processor Router Tool Call Multi-step Fully Autonomous AccuracyÒ Correctness, factuality Makes correctable factual errors that humans can easily verify and ﬁx through standard fact-checking Routes to incorrect but reversible actions with clear audit trails for correction Tool errors produce clear failure modes and error messages, but may require technical expertise to ﬁx Chains of errors create compounding misleading conclusions that become increasingly difﬁcult to identify Creates and acts on entirely ﬁctional scenarios without possibility of veriﬁcation or correction AssistivenessŒ Supporting human agency Beneﬁt: Automates repetitive tasks under direct supervision Risk: Minimal as human reviews each step Beneﬁt: Intelligently distributes tasks to appropriate tools Risk: May occasionally need manual correction of routing decisions Beneﬁt: Handles complex tool interactions autonomously Risk: Some tasks may require signiﬁcant rework if done incorrectly Beneﬁt: Manages entire workﬂows without intervention Risk: May make signiﬁcant decisions that need human review Beneﬁt: Complete automation of complex processes Risk",
+    "metadata": {
+      "title": "sample",
+      "page_num": "17",
+      "chunk_id": "1",
+      "source": "tests/data/sample.pdf",
+      "global_id": "56"
+    }
+  },
+  {
+    "content": "May make signiﬁcant decisions that need human review Beneﬁt: Complete automation of complex processes Risk: Could make major decisions without human oversight ConsistencyÒ Reliability, predictability Completely predictable outputs for given inputs with deterministic processing Consistent routing with only minor variations in edge cases that can be documented Tool interactions may vary but stay within expected and testable parameters Complex chains create unpredictable outcomes with different paths to same goal Entirely unpredictable behavior chains with no way to ensure consistency across runs EfﬁciencyŒ Resource optimization Beneﬁt: Fast, predictable processing of deﬁned tasks Risk: Limited to basic operations Beneﬁt: Optimal task distribution Risk: Some overhead from routing decisions Beneﬁt: Parallel tool execution and optimization Risk: Potential resource conﬂicts between tools Beneﬁt: Complex workﬂow optimization Risk: Signiﬁcant debug time needed Beneﬁt: Maximum possible automation Risk: Resource usage becomes unpredictable EquityÒ Fair treatment, access Clear fairness rules can be implemented and veriﬁed through direct oversight Some bias in routing but can be monitored and corrected through logging Beneﬁt: Equal tool access and standardized processing Risk: Some groups may lack necessary tool literacy Beneﬁt: Potential for bias correction Risk",
+    "metadata": {
+      "title": "sample",
+      "page_num": "17",
+      "chunk_id": "2",
+      "source": "tests/data/sample.pdf",
+      "global_id": "57"
+    }
+  },
+  {
+    "content": "Equal tool access and standardized processing Risk: Some groups may lack necessary tool literacy Beneﬁt: Potential for bias correction Risk: Biases compound across steps System creates and ampliﬁes biases without possibility of detection or correction FlexibilityÒ System integration abilities Beneﬁt: Safe, limited system connections Risk: Integration requires more overhead Beneﬁt: Flexible routing between systems Risk: Multiple security surfaces to protect Beneﬁt: Rich tool ecosystem integration Risk: Version conﬂicts and compatibility issues Beneﬁt: Complex system orchestration Risk: Potential for cascade failures Beneﬁt: Universal system integration Risk: Security boundaries completely break down HumanlikenessŒ Human behavior similarity Beneﬁt: Basic natural interactions in deﬁned contexts Risk: May appear mechanical or scripted Beneﬁt: Context-aware responses and transitions Risk: Sometimes produces unnatural interaction patterns Beneﬁt: Natural tool use and interaction ﬂows Risk: May trigger uncanny valley effects Beneﬁt: Complex human-like behavioral patterns Risk: Can lead to overreliance on system Beneﬁt: Very natural and ﬂuid interaction Risk",
+    "metadata": {
+      "title": "sample",
+      "page_num": "17",
+      "chunk_id": "3",
+      "source": "tests/data/sample.pdf",
+      "global_id": "58"
+    }
+  },
+  {
+    "content": "Complex human-like behavioral patterns Risk: Can lead to overreliance on system Beneﬁt: Very natural and ﬂuid interaction Risk: May manipulate human trust through seeming human PrivacyÒ Sensitive info protection Strictly limited data access with clear boundaries and controls Controlled access to multiple sources with comprehensive logging Unexpected data combinations possible across different tools Complex data ﬂows enable detailed user proﬁling over time Unrestricted data access and sharing across all available sources RelevanceŒ Contextual appropriateness Beneﬁt: Direct context matching for tasks Risk: May miss subtle contextual nuances Beneﬁt: Smart routing based on context Risk: Potential context switches between tools Beneﬁt: Appropriate tool selection for context Risk: May misinterpret contextual needs Beneﬁt: Deep context understanding Risk: Context may drift over multiple steps Beneﬁt: Full context awareness and adaptation Risk",
+    "metadata": {
+      "title": "sample",
+      "page_num": "17",
+      "chunk_id": "4",
+      "source": "tests/data/sample.pdf",
+      "global_id": "59"
+    }
+  },
+  {
+    "content": "Deep context understanding Risk: Context may drift over multiple steps Beneﬁt: Full context awareness and adaptation Risk: May redeﬁne context inappropriately SafetyÒ Protection from harm Clear safety boundaries with comprehensive human oversight Limited action scope with well-deﬁned and contained risks Tool combinations may create unexpected and harmful interactions Complex interaction risks become impossible to predict or prevent Unbounded potential for harmful actions without restrictions SecurityÒ System protection Highly restricted system access with clear boundaries Multiple but fully monitored access points Tool access creates multiple potential attack vectors Complex chains enable sophisticated attack patterns Complete system compromise becomes possible SustainabilityŒ Environmental impact Predictable and limited resource usage patterns Moderate resource overhead from routing operations Multiple tools increase overall resource consumption Beneﬁt: Novel climate solutions Risk: Resource-intensive chains Beneﬁt: Potential breakthrough solutions Risk",
+    "metadata": {
+      "title": "sample",
+      "page_num": "17",
+      "chunk_id": "5",
+      "source": "tests/data/sample.pdf",
+      "global_id": "60"
+    }
+  },
+  {
+    "content": "Novel climate solutions Risk: Resource-intensive chains Beneﬁt: Potential breakthrough solutions Risk: Unbounded resource consumption TrustÒ System behavior reliability All actions can be directly veriﬁed and validated Decision paths are clear and can be audited Tool interactions create signiﬁcant trust uncertainties Complex chains make validation impossible No way to verify or establish trustworthiness TruthfulnessÒ Output accuracy, honesty Direct fact checking of all outputs possible Decision paths can be validated for accuracy Tool combinations may create convincing falsehoods Truth becomes increasingly unclear across steps Cannot distinguish between truth and ﬁction Assessment: Beneﬁts ą Risks Beneﬁts « Risks Risks ą Beneﬁts Directionality: Ò Risk Increases with Autonomy Œ Risk May or May not Increase with Autonomy Table 4",
+    "metadata": {
+      "title": "sample",
+      "page_num": "17",
+      "chunk_id": "6",
+      "source": "tests/data/sample.pdf",
+      "global_id": "61"
+    }
+  },
+  {
+    "content": "Value-Risk Assessment Across Agent Autonomy Levels. Colors indicate beneﬁt-risk balance, not absolute risk levels. Arrows show risk relationship with increasing autonomy. 17",
+    "metadata": {
+      "title": "sample",
+      "page_num": "17",
+      "chunk_id": "7",
+      "source": "tests/data/sample.pdf",
+      "global_id": "62"
+    }
+  }
+]
