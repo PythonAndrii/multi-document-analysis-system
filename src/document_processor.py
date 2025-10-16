@@ -151,7 +151,7 @@ class DocumentProcessor:  # noqa: D101
         *,
         chunk_size: int = 1500,
         chunk_overlap: int = 150,
-        output_json: str | Path | None = "chunks.json",
+        output_json: str | Path | None = "data/chunks.json",
     ) -> List[Chunk]:
         """Process every *.pdf* in *directory* and optionally persist chunks.
 
