@@ -1,8 +1,8 @@
 import json
 from pathlib import Path
 from typing import List
-from utils.dto.data_processing import Chunk
-from utils.loggers import logger
+from src.utils.dto.data_processing import Chunk
+from src.utils.loggers import logger
 
 
 def write_chunks_json(path: str | Path, chunks: List[Chunk]) -> None:  # noqa: D401

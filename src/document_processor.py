@@ -21,9 +21,9 @@ from pathlib import Path
 
 import fitz  # PyMuPDF
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from utils.dto.data_processing import Page, Chunk, DocumentProcessorConfig
-from utils.helpers import write_chunks_json
-from utils.loggers import logger
+from src.utils.dto.data_processing import Page, Chunk, DocumentProcessorConfig
+from src.utils.helpers import write_chunks_json
+from src.utils.loggers import logger
 from tqdm import tqdm
 import re
 
@@ -84,7 +84,7 @@ class PageChunker:  # noqa: D101
         self._splitter = RecursiveCharacterTextSplitter(
             chunk_size=config.chunk_size,
             chunk_overlap=config.chunk_overlap,
-            separators=["\n\n", "\n", ". ", "! ", "? ", "; ", ": ", " "],
+            separators=[". ", "! ", "? ", "; ", ": ", " ", ""],
             keep_separator=False,
         )
 
@@ -149,8 +149,8 @@ class DocumentProcessor:  # noqa: D101
     def process_pdfs_in_directory(
         directory: str | Path,
         *,
-        chunk_size: int = 1500,
-        chunk_overlap: int = 150,
+        chunk_size: int = 4000,
+        chunk_overlap: int = 200,
         output_json: str | Path | None = "data/chunks.json",
     ) -> List[Chunk]:
         """Process every *.pdf* in *directory* and optionally persist chunks.

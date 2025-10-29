@@ -14,6 +14,9 @@ class Settings(BaseSettings):
     google_api_key: str
     embedding_model: str = "models/gemini-embedding-001"
     
+    # Caching settings
+    cache_enabled: bool = True
+    cache_dir: str = "src/.cache"
 
     # Optional LLM settings (needed for Day 3)
     llm_model: str = "gemini-2.0-flash-lite"

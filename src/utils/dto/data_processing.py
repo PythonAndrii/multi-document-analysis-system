@@ -13,7 +13,7 @@ class Chunk(BaseModel):
 
 
 class DocumentProcessorConfig(BaseModel):
-    chunk_size: int = 1500
-    chunk_overlap: int = 150
+    chunk_size: int = 4000
+    chunk_overlap: int = 200
     title: str = ""
     source: str = ""
