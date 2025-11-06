@@ -15,6 +15,7 @@ from langchain_core.output_parsers import StrOutputParser
 from src.core.client import get_llm
 from src.embeddings import GeminiEmbeddings
 from src.retrievers.faiss_retriever import FaissRetriever
+from src.reranking import Reranker
 from src.utils.prompts import get_rag_prompt
 from src.core.settings import settings
 from src.utils.loggers import logger
@@ -36,6 +37,7 @@ class RAGPipeline:
         self.embeddings = embeddings or GeminiEmbeddings()
         self.retriever: FaissRetriever | None = None
         self.llm = get_llm(model=settings.llm_model, temperature=settings.llm_temperature)
+        self.reranker = Reranker(settings.reranker_model) if settings.reranker_enabled else None
 
     # ------------------------------------------------------------------
     def ingest(self, chunks: Iterable[Document]) -> None:
@@ -64,6 +66,13 @@ class RAGPipeline:
             )
         # Use the underlying vector store to access similarity scores
         results = self.retriever._vector_store.similarity_search_with_score(question, k=self.k)  # type: ignore[attr-defined]
+        
+        # Apply reranking if enabled
+        if self.reranker:
+            docs_to_rerank = [doc for doc, _ in results]
+            reranked_results = self.reranker.rerank(question, docs_to_rerank)
+            results = reranked_results[:settings.rerank_top_k]
+        
         formatted: List[Tuple[str, str, float]] = []
         for doc, score in results:
             meta = doc.metadata or {}

@@ -18,6 +18,11 @@ class Settings(BaseSettings):
     cache_enabled: bool = True
     cache_dir: str = "src/.cache"
 
+    # Reranker settings
+    reranker_enabled: bool = True
+    reranker_model: str = "cross-encoder/ms-marco-MiniLM-L-6-v2"
+    rerank_top_k: int = 3
+
     # Optional LLM settings (needed for Day 3)
     llm_model: str = "gemini-2.0-flash-lite"
     llm_temperature: float = 0.2
